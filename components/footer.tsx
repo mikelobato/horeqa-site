@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="border-t border-border py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
         <Image
-          src="/horeqa-logo.svg"
+          src="/horeqa_logo_dark.svg"
           alt="horeqa.com"
           width={120}
           height={22}

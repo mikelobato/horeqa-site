@@ -20,7 +20,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#" aria-label="Horeqa home">
           <Image
-            src="/horeqa-logo.svg"
+            src="/horeqa_logo_dark.svg"
             alt="horeqa.com"
             width={180}
             height={32}

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     'Horeqa helps restaurants and hospitality operators implement, integrate, and operate their technology stack. Consulting, implementation, and support for HORECA.',
   icons: {
-    icon: '/horeqa-favicon.svg',
+    icon: '/horeqa_favicon.svg',
   },
 }
 
