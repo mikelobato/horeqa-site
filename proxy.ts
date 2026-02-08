@@ -25,6 +25,17 @@ function getLocale(request: NextRequest): string {
 
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const host = request.headers.get("host") ?? "";
+  const hostname = host.split(":")[0] ?? "";
+
+  // Canonicalize to www in production.
+  if (hostname === "horeqa.com") {
+    const url = request.nextUrl.clone();
+    url.protocol = "https:";
+    url.hostname = "www.horeqa.com";
+    url.port = "";
+    return NextResponse.redirect(url, 308);
+  }
 
   if (pathname.includes("/src/") || pathname.includes("/_next/") || pathname.startsWith("/api/")) {
     return NextResponse.next();

@@ -5,9 +5,8 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.NODE_ENV === "production" ? "https://www.horeqa.com" : "https://dev-www.horeqa.com");
+  // Always publish the production sitemap on the canonical www domain.
+  const baseUrl = "https://www.horeqa.com";
 
   const routes = ["", "/providers"];
 

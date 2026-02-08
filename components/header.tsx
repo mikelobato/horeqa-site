@@ -101,15 +101,33 @@ export function Header() {
             </div>
           </div>
 
-          <button
-            className="md:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={
-              mobileOpen ? TRN("nav.mobile.close", "Close menu") : TRN("nav.mobile.open", "Open menu")
-            }
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={
+                mobileOpen ? TRN("nav.mobile.close", "Close menu") : TRN("nav.mobile.open", "Open menu")
+              }
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+
+            {/* Mobile language dropdown aligned to the far right */}
+            <label htmlFor="language-select-mobile-bar" className="sr-only">
+              {TRN("nav.language", "Language")}
+            </label>
+            <select
+              id="language-select-mobile-bar"
+              value={locale}
+              onChange={(event) => setLocale(event.target.value as Locale)}
+              className="rounded-md border border-input bg-background px-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              {SUPPORTED_LOCALES.map((lang) => (
+                <option key={lang} value={lang}>
+                  {lang.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -142,23 +160,6 @@ export function Header() {
             >
               {primaryCta.label}
             </a>
-            <div className="flex items-center gap-2">
-              <label htmlFor="language-select-mobile" className="sr-only">
-                {TRN("nav.language", "Language")}
-              </label>
-              <select
-                id="language-select-mobile"
-                value={locale}
-                onChange={(event) => setLocale(event.target.value as Locale)}
-                className="w-full rounded-md border border-input bg-background px-2 py-2 text-sm font-medium text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-              >
-                {SUPPORTED_LOCALES.map((lang) => (
-                  <option key={lang} value={lang}>
-                    {lang.toUpperCase()}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
         </nav>
       )}
