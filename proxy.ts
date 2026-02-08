@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export const runtime = "experimental-edge";
-
 const locales = ["ar", "ca", "de", "en", "es", "fr", "it", "pt", "zh"];
 const defaultLocale = "en";
 
