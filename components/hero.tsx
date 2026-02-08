@@ -6,14 +6,15 @@ export function Hero() {
   const TRN = useTRN()
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden">
       {/* Background accents */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
         <div className="absolute -bottom-24 left-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-foreground/5 blur-3xl" />
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32 lg:py-40">
+      <div className="w-full">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-32 lg:py-40">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
             {TRN(
@@ -62,6 +63,7 @@ export function Hero() {
             </a>
           </div>
         </div>
+      </div>
       </div>
     </section>
   )
