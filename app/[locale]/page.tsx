@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { Stats } from "@/components/stats";
 import { OperatorMessage } from "@/components/operator-message";
 import { Services } from "@/components/services";
 import { Clients } from "@/components/clients";
@@ -69,6 +70,7 @@ export default function Page() {
       <Header />
       <main>
         <Hero />
+        <Stats />
         <OperatorMessage />
         <Services />
         <Clients />
