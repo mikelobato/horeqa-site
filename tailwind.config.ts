@@ -10,6 +10,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: [
+          "var(--font-sora)",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

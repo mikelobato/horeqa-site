@@ -38,7 +38,7 @@ export function Services() {
             "services.title",
             "End-to-end technology services for hospitality.",
             null,
-            "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
+            "Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad')."
           )}
         </p>
 
@@ -57,7 +57,7 @@ export function Services() {
                       "services.items.consulting.description",
                       "Strategy, architecture, and selection of hospitality technology.",
                       null,
-                      "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
+                      "Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad')."
                     )
                   : TRN(`services.items.${service.key}.description`, service.description)}
               </p>

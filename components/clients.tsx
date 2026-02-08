@@ -24,7 +24,7 @@ export function Clients() {
             "clients.title",
             "Focused on hospitality, exclusively.",
             null,
-            "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
+            "Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad')."
           )}
         </p>
 

@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.NODE_ENV === "production" ? "https://www.horeqa.com" : "https://dev-www.horeqa.com");
 
-  const routes = [""];
+  const routes = ["", "/providers"];
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 

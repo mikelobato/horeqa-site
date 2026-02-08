@@ -17,7 +17,7 @@ export function Positioning() {
               "about.description",
               "Horeqa is specialized exclusively in hospitality technology. We are independent, platform-agnostic, and focused on long-term operational success.",
               null,
-              "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
+              "Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad')."
             )}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-6">

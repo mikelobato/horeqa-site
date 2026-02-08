@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
-import { Hero } from "@/components/hero";
-import { OperatorMessage } from "@/components/operator-message";
-import { Services } from "@/components/services";
-import { Clients } from "@/components/clients";
-import { Process } from "@/components/process";
-import { Positioning } from "@/components/positioning";
-import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
+import { ProvidersMessage } from "@/components/providers-message";
 import { normalizeLocale, type Language } from "@/lib/i18n";
 import { createTrn } from "@/lib/trn";
 import { META_TRANSLATIONS } from "@/translations/meta";
@@ -24,18 +18,19 @@ export async function generateMetadata({
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.NODE_ENV === "production" ? "https://www.horeqa.com" : "https://dev-www.horeqa.com");
-  const canonicalUrl = `${baseUrl}/${locale}`;
+  const canonicalUrl = `${baseUrl}/${locale}/providers`;
+
   const title = TRN(
-    "meta.home.title",
-    "Technology partner for modern hospitality",
+    "meta.providers.title",
+    "For hospitality technology providers",
     null,
-    "Home page meta title. Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad')."
+    "Page meta title for the providers page."
   );
   const description = TRN(
-    "meta.home.description",
-    "Consulting, implementation, and support for HORECA technology stacks.",
+    "meta.providers.description",
+    "Implementation, operations, and support to help hospitality tech providers deliver stable rollouts and strong adoption.",
     null,
-    "Home page meta description."
+    "Page meta description for the providers page."
   );
 
   return {
@@ -56,27 +51,22 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        en: `${baseUrl}/en`,
-        es: `${baseUrl}/es`,
+        en: `${baseUrl}/en/providers`,
+        es: `${baseUrl}/es/providers`,
       },
     },
   };
 }
 
-export default function Page() {
+export default function ProvidersPage() {
   return (
     <>
       <Header />
       <main>
-        <Hero />
-        <OperatorMessage />
-        <Services />
-        <Clients />
-        <Process />
-        <Positioning />
-        <Contact />
+        <ProvidersMessage />
       </main>
       <Footer />
     </>
   );
 }
+

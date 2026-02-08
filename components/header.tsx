@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { useLocale, useSetLocale, useTRN } from "@/contexts/LanguageContext"
 import { SUPPORTED_LOCALES, type Locale } from "@/translations"
@@ -11,31 +12,48 @@ export function Header() {
   const TRN = useTRN()
   const locale = useLocale()
   const setLocale = useSetLocale()
+  const pathname = usePathname()
 
   const navLinks = [
-    { label: TRN("nav.services", "Services"), href: "#services" },
-    { label: TRN("nav.clients", "Clients"), href: "#clients" },
-    { label: TRN("nav.process", "Process"), href: "#process" },
-    { label: TRN("nav.about", "About"), href: "#about" },
-    { label: TRN("nav.contact", "Contact"), href: "#contact" },
+    { label: TRN("nav.restaurants", "For restaurants"), href: `/${locale}` },
+    { label: TRN("nav.providers", "For providers"), href: `/${locale}/providers` },
   ]
+
+  const isProvidersPage = pathname?.includes("/providers") ?? false
+  const primaryCta = isProvidersPage
+    ? {
+        href: `/${locale}/providers#apply`,
+        label: TRN(
+          "nav.cta.providers",
+          "Apply as a provider",
+          null,
+          "Header CTA when on the providers page. Must not be a generic 'Contact us'."
+        ),
+      }
+    : {
+        href: `/${locale}#contact`,
+        label: TRN("nav.cta", "Contact us"),
+      }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href={`/${locale}`} aria-label={TRN("nav.home", "Horeqa home")}>
-          <Image
-            src="/horeqa_logo_dark.svg"
-            alt={TRN("nav.logoAlt", "Horeqa logo")}
-            width={180}
-            height={32}
-            priority
-            className="h-7 w-auto"
-          />
-        </a>
+      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 py-4">
+        {/* Left: logo */}
+        <div className="flex items-center justify-start">
+          <a href={`/${locale}`} aria-label={TRN("nav.home", "Horeqa home")}>
+            <Image
+              src="/horeqa_logo_dark.svg"
+              alt={TRN("nav.logoAlt", "Horeqa logo")}
+              width={180}
+              height={32}
+              priority
+              className="h-7 w-auto"
+            />
+          </a>
+        </div>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
+        {/* Center: desktop menu */}
+        <nav className="hidden items-center justify-center gap-8 md:flex" aria-label="Main navigation">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -45,41 +63,46 @@ export function Header() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            {TRN("nav.cta", "Contact us")}
-          </a>
-          <div className="flex items-center gap-2">
-            <label htmlFor="language-select" className="sr-only">
-              {TRN("nav.language", "Language")}
-            </label>
-            <select
-              id="language-select"
-              value={locale}
-              onChange={(event) => setLocale(event.target.value as Locale)}
-              className="rounded-md border border-input bg-background px-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-            >
-              {SUPPORTED_LOCALES.map((lang) => (
-                <option key={lang} value={lang}>
-                  {lang.toUpperCase()}
-                </option>
-              ))}
-            </select>
-          </div>
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={
-            mobileOpen ? TRN("nav.mobile.close", "Close menu") : TRN("nav.mobile.open", "Open menu")
-          }
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Right: actions (desktop) / toggle (mobile) */}
+        <div className="flex items-center justify-end">
+          <div className="hidden items-center gap-4 md:flex">
+            <a
+              href={primaryCta.href}
+              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              {primaryCta.label}
+            </a>
+            <div className="flex items-center gap-2">
+              <label htmlFor="language-select" className="sr-only">
+                {TRN("nav.language", "Language")}
+              </label>
+              <select
+                id="language-select"
+                value={locale}
+                onChange={(event) => setLocale(event.target.value as Locale)}
+                className="rounded-md border border-input bg-background px-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                {SUPPORTED_LOCALES.map((lang) => (
+                  <option key={lang} value={lang}>
+                    {lang.toUpperCase()}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <button
+            className="md:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={
+              mobileOpen ? TRN("nav.mobile.close", "Close menu") : TRN("nav.mobile.open", "Open menu")
+            }
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile nav */}
@@ -97,11 +120,11 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contact"
+              href={primaryCta.href}
               className="mt-2 rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               onClick={() => setMobileOpen(false)}
             >
-              {TRN("nav.cta", "Contact us")}
+              {primaryCta.label}
             </a>
             <div className="flex items-center gap-2">
               <label htmlFor="language-select-mobile" className="sr-only">
