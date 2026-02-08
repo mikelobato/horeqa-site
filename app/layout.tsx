@@ -1,32 +1,36 @@
-import React from "react"
-import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import { createTrn } from "@/lib/trn";
+import { META_TRANSLATIONS } from "@/translations/meta";
 
-import './globals.css'
-
-const _inter = Inter({ subsets: ['latin'] })
+const TRN = createTrn(META_TRANSLATIONS.en);
 
 export const metadata: Metadata = {
-  title: 'Horeqa — Technology partner for modern hospitality',
-  description:
-    'Horeqa helps restaurants and hospitality operators implement, integrate, and operate their technology stack. Consulting, implementation, and support for HORECA.',
-  icons: {
-    icon: '/horeqa_favicon.svg',
+  title: {
+    default: "Horeqa",
+    template: "%s | Horeqa",
   },
-}
+  description: TRN(
+    "meta.global.description",
+    "Horeqa helps restaurants and hospitality operators implement, integrate, and operate their technology stack.",
+    null,
+    "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
+  ),
+  icons: {
+    icon: "/horeqa_favicon.svg",
+  },
+};
 
 export const viewport: Viewport = {
-  themeColor: '#224C86',
-}
+  themeColor: "#224C86",
+};
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
-  )
+  );
 }
