@@ -53,7 +53,15 @@ export function Header() {
         </div>
 
         {/* Center: desktop menu */}
-        <nav className="hidden items-center justify-center gap-8 md:flex" aria-label="Main navigation">
+        <nav
+          className="hidden items-center justify-center gap-8 md:flex"
+          aria-label={TRN(
+            "nav.aria.main",
+            "Main navigation",
+            null,
+            "ARIA label for the primary (desktop) navigation."
+          )}
+        >
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -107,7 +115,15 @@ export function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="border-t border-border px-6 pb-6 pt-4 md:hidden" aria-label="Mobile navigation">
+        <nav
+          className="border-t border-border px-6 pb-6 pt-4 md:hidden"
+          aria-label={TRN(
+            "nav.aria.mobile",
+            "Mobile navigation",
+            null,
+            "ARIA label for the mobile navigation panel."
+          )}
+        >
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a

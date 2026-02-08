@@ -2,33 +2,6 @@
 
 import { useTRN } from "@/contexts/LanguageContext"
 
-const steps = [
-  {
-    key: "discover",
-    number: "01",
-    title: "Understand the operation",
-    description: "We study your business, workflows, and current technology landscape.",
-  },
-  {
-    key: "design",
-    number: "02",
-    title: "Design the tech stack",
-    description: "We architect the right combination of platforms and integrations for your needs.",
-  },
-  {
-    key: "implement",
-    number: "03",
-    title: "Implement & integrate",
-    description: "We deploy, configure, and connect all systems for a seamless operation.",
-  },
-  {
-    key: "support",
-    number: "04",
-    title: "Support & optimize",
-    description: "We provide ongoing monitoring, optimization, and vendor coordination.",
-  },
-]
-
 export function Process() {
   const TRN = useTRN()
 
@@ -43,19 +16,65 @@ export function Process() {
         </p>
 
         <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step) => (
-            <div key={step.number} className="flex flex-col gap-3">
-              <span className="text-3xl font-bold text-primary">
-                {step.number}
-              </span>
-              <h3 className="text-lg font-semibold text-foreground">
-                {TRN(`process.steps.${step.key}.title`, step.title)}
-              </h3>
-              <p className="leading-relaxed text-muted-foreground">
-                {TRN(`process.steps.${step.key}.description`, step.description)}
-              </p>
-            </div>
-          ))}
+          <div className="flex flex-col gap-3">
+            <span className="text-3xl font-bold text-primary">01</span>
+            <h3 className="text-lg font-semibold text-foreground">
+              {TRN("process.steps.discover.title", "Understand the operation", null, "Step title. Short sentence.")}
+            </h3>
+            <p className="leading-relaxed text-muted-foreground">
+              {TRN(
+                "process.steps.discover.description",
+                "We study your business, workflows, and current technology landscape.",
+                null,
+                "Step description. Operational tone."
+              )}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <span className="text-3xl font-bold text-primary">02</span>
+            <h3 className="text-lg font-semibold text-foreground">
+              {TRN("process.steps.design.title", "Design the tech stack", null, "Step title. Short sentence.")}
+            </h3>
+            <p className="leading-relaxed text-muted-foreground">
+              {TRN(
+                "process.steps.design.description",
+                "We architect the right combination of platforms and integrations for your needs.",
+                null,
+                "Step description. Keep it specific."
+              )}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <span className="text-3xl font-bold text-primary">03</span>
+            <h3 className="text-lg font-semibold text-foreground">
+              {TRN("process.steps.implement.title", "Implement and integrate", null, "Step title. Avoid ampersands.")}
+            </h3>
+            <p className="leading-relaxed text-muted-foreground">
+              {TRN(
+                "process.steps.implement.description",
+                "We deploy, configure, and connect all systems for a seamless operation.",
+                null,
+                "Step description. Operational tone."
+              )}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <span className="text-3xl font-bold text-primary">04</span>
+            <h3 className="text-lg font-semibold text-foreground">
+              {TRN("process.steps.support.title", "Support and optimize", null, "Step title. Avoid ampersands.")}
+            </h3>
+            <p className="leading-relaxed text-muted-foreground">
+              {TRN(
+                "process.steps.support.description",
+                "We provide ongoing monitoring, optimization, and vendor coordination.",
+                null,
+                "Step description. Operational tone."
+              )}
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -3,13 +3,6 @@
 import { Building2, Store, UtensilsCrossed, Cpu } from "lucide-react"
 import { useTRN } from "@/contexts/LanguageContext"
 
-const segments = [
-  { key: "restaurants", icon: UtensilsCrossed, label: "Restaurants & restaurant groups" },
-  { key: "qsr", icon: Store, label: "QSR & chains" },
-  { key: "operators", icon: Building2, label: "Hospitality operators" },
-  { key: "vendors", icon: Cpu, label: "Technology vendors & platforms" },
-]
-
 export function Clients() {
   const TRN = useTRN()
 
@@ -29,17 +22,45 @@ export function Clients() {
         </p>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {segments.map((seg) => (
-            <div
-              key={seg.label}
-              className="flex items-start gap-4 rounded-lg border border-border bg-background p-5"
-            >
-              <seg.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-              <span className="text-sm font-medium leading-snug text-foreground">
-                {TRN(`clients.segments.${seg.key}`, seg.label)}
-              </span>
-            </div>
-          ))}
+          <div className="flex items-start gap-4 rounded-lg border border-border bg-background p-5">
+            <UtensilsCrossed className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <span className="text-sm font-medium leading-snug text-foreground">
+              {TRN(
+                "clients.segments.restaurants",
+                "Restaurants and restaurant groups",
+                null,
+                "Segment label. Short noun phrase."
+              )}
+            </span>
+          </div>
+          <div className="flex items-start gap-4 rounded-lg border border-border bg-background p-5">
+            <Store className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <span className="text-sm font-medium leading-snug text-foreground">
+              {TRN("clients.segments.qsr", "QSR and chains", null, "Segment label. Short noun phrase.")}
+            </span>
+          </div>
+          <div className="flex items-start gap-4 rounded-lg border border-border bg-background p-5">
+            <Building2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <span className="text-sm font-medium leading-snug text-foreground">
+              {TRN(
+                "clients.segments.operators",
+                "Hospitality operators",
+                null,
+                "Segment label. Translate 'hospitality' as the industry term (Spanish should use 'hosteleria')."
+              )}
+            </span>
+          </div>
+          <div className="flex items-start gap-4 rounded-lg border border-border bg-background p-5">
+            <Cpu className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <span className="text-sm font-medium leading-snug text-foreground">
+              {TRN(
+                "clients.segments.vendors",
+                "Technology vendors and platforms",
+                null,
+                "Segment label. Short noun phrase."
+              )}
+            </span>
+          </div>
         </div>
 
         <p className="mt-10 max-w-xl leading-relaxed text-muted-foreground">

@@ -94,22 +94,50 @@ export function ProvidersMessage() {
                 {TRN("providers.fit.workWith.title", "Who we work with")}
               </h2>
               <ul className="mt-6 space-y-3 text-sm leading-relaxed text-foreground">
-                {[
-                  {
-                    key: "established",
-                    text: "Established hospitality technology platforms",
-                  },
-                  { key: "categories", text: "POS, ordering, payments, and operational software" },
-                  { key: "quality", text: "Providers focused on long-term product quality" },
-                  { key: "excellence", text: "Teams that value operational excellence and stability" },
-                ].map((item) => (
-                  <li key={item.key} className="flex gap-3">
-                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                    <span>
-                      {TRN(`providers.fit.workWith.${item.key}`, item.text, null, "Bullet item. Keep it crisp.")}
-                    </span>
-                  </li>
-                ))}
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>
+                    {TRN(
+                      "providers.fit.workWith.established",
+                      "Established hospitality technology platforms",
+                      null,
+                      "Bullet item. Keep it crisp."
+                    )}
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>
+                    {TRN(
+                      "providers.fit.workWith.categories",
+                      "POS, ordering, payments, and operational software",
+                      null,
+                      "Bullet item. Keep it crisp."
+                    )}
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>
+                    {TRN(
+                      "providers.fit.workWith.quality",
+                      "Providers focused on long-term product quality",
+                      null,
+                      "Bullet item. Keep it crisp."
+                    )}
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>
+                    {TRN(
+                      "providers.fit.workWith.excellence",
+                      "Teams that value operational excellence and stability",
+                      null,
+                      "Bullet item. Keep it crisp."
+                    )}
+                  </span>
+                </li>
               </ul>
             </div>
 
@@ -118,24 +146,50 @@ export function ProvidersMessage() {
                 {TRN("providers.fit.dontWorkWith.title", "Who we don't work with")}
               </h2>
               <ul className="mt-6 space-y-3 text-sm leading-relaxed text-foreground">
-                {[
-                  { key: "earlyStage", text: "Early-stage or unstable products" },
-                  { key: "integrations", text: "Platforms without real integration capabilities" },
-                  { key: "notRealOps", text: "Solutions not designed for real hospitality operations" },
-                  { key: "lowTouch", text: "Generic resellers or low-touch models" },
-                ].map((item) => (
-                  <li key={item.key} className="flex gap-3">
-                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-foreground/30" />
-                    <span>
-                      {TRN(
-                        `providers.fit.dontWorkWith.${item.key}`,
-                        item.text,
-                        null,
-                        "Bullet item. Clear exclusion. No soft language."
-                      )}
-                    </span>
-                  </li>
-                ))}
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-foreground/30" />
+                  <span>
+                    {TRN(
+                      "providers.fit.dontWorkWith.earlyStage",
+                      "Early-stage or unstable products",
+                      null,
+                      "Bullet item. Clear exclusion. No soft language."
+                    )}
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-foreground/30" />
+                  <span>
+                    {TRN(
+                      "providers.fit.dontWorkWith.integrations",
+                      "Platforms without real integration capabilities",
+                      null,
+                      "Bullet item. Clear exclusion. No soft language."
+                    )}
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-foreground/30" />
+                  <span>
+                    {TRN(
+                      "providers.fit.dontWorkWith.notRealOps",
+                      "Solutions not designed for real hospitality operations",
+                      null,
+                      "Bullet item. Clear exclusion. No soft language."
+                    )}
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-foreground/30" />
+                  <span>
+                    {TRN(
+                      "providers.fit.dontWorkWith.lowTouch",
+                      "Generic resellers or low-touch models",
+                      null,
+                      "Bullet item. Clear exclusion. No soft language."
+                    )}
+                  </span>
+                </li>
               </ul>
             </div>
           </div>
@@ -167,24 +221,56 @@ export function ProvidersMessage() {
 
             <div className="lg:col-span-8">
               <div className="grid gap-4 sm:grid-cols-2">
-                {[
-                  { key: "onboarding", text: "Restaurant onboarding" },
-                  { key: "golive", text: "Activation and go-live" },
-                  { key: "support", text: "First-line support" },
-                  { key: "escalations", text: "Operational coordination and escalations" },
-                  { key: "billing", text: "Optional unified or delegated billing" },
-                ].map((item) => (
-                  <div key={item.key} className="rounded-lg border border-border bg-background p-5">
-                    <p className="text-sm font-medium text-foreground">
-                      {TRN(
-                        `providers.ownership.items.${item.key}`,
-                        item.text,
-                        null,
-                        "Ownership bullet. Short noun phrase."
-                      )}
-                    </p>
-                  </div>
-                ))}
+                <div className="rounded-lg border border-border bg-background p-5">
+                  <p className="text-sm font-medium text-foreground">
+                    {TRN(
+                      "providers.ownership.items.onboarding",
+                      "Restaurant onboarding",
+                      null,
+                      "Ownership bullet. Short noun phrase."
+                    )}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-border bg-background p-5">
+                  <p className="text-sm font-medium text-foreground">
+                    {TRN(
+                      "providers.ownership.items.golive",
+                      "Activation and go-live",
+                      null,
+                      "Ownership bullet. Short noun phrase."
+                    )}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-border bg-background p-5">
+                  <p className="text-sm font-medium text-foreground">
+                    {TRN(
+                      "providers.ownership.items.support",
+                      "First-line support",
+                      null,
+                      "Ownership bullet. Short noun phrase."
+                    )}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-border bg-background p-5">
+                  <p className="text-sm font-medium text-foreground">
+                    {TRN(
+                      "providers.ownership.items.escalations",
+                      "Operational coordination and escalations",
+                      null,
+                      "Ownership bullet. Short noun phrase."
+                    )}
+                  </p>
+                </div>
+                <div className="rounded-lg border border-border bg-background p-5 sm:col-span-2">
+                  <p className="text-sm font-medium text-foreground">
+                    {TRN(
+                      "providers.ownership.items.billing",
+                      "Optional unified or delegated billing",
+                      null,
+                      "Ownership bullet. Short noun phrase."
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -228,24 +314,50 @@ export function ProvidersMessage() {
                   {TRN("providers.evaluation.assessTitle", "We assess")}
                 </p>
                 <ul className="mt-5 space-y-3 text-sm leading-relaxed text-foreground">
-                  {[
-                    { key: "quality", text: "Product quality and stability" },
-                    { key: "integrations", text: "Integration capabilities" },
-                    { key: "supportModel", text: "Support and escalation model" },
-                    { key: "fit", text: "Fit for real hospitality operations" },
-                  ].map((item) => (
-                    <li key={item.key} className="flex gap-3">
-                      <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                      <span>
-                        {TRN(
-                          `providers.evaluation.assess.${item.key}`,
-                          item.text,
-                          null,
-                          "Assessment criteria. Keep it as a noun phrase."
-                        )}
-                      </span>
-                    </li>
-                  ))}
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.evaluation.assess.quality",
+                        "Product quality and stability",
+                        null,
+                        "Assessment criteria. Keep it as a noun phrase."
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.evaluation.assess.integrations",
+                        "Integration capabilities",
+                        null,
+                        "Assessment criteria. Keep it as a noun phrase."
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.evaluation.assess.supportModel",
+                        "Support and escalation model",
+                        null,
+                        "Assessment criteria. Keep it as a noun phrase."
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.evaluation.assess.fit",
+                        "Fit for real hospitality operations",
+                        null,
+                        "Assessment criteria. Keep it as a noun phrase."
+                      )}
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -369,24 +481,50 @@ export function ProvidersMessage() {
                   {TRN("providers.apply.includeTitle", "Include")}
                 </p>
                 <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                  {[
-                    { key: "category", text: "Product category (POS, ordering, payments, etc.)" },
-                    { key: "markets", text: "Markets and operator profiles you serve" },
-                    { key: "integrations", text: "Integration docs or an overview of your API and partners" },
-                    { key: "support", text: "Your support and escalation model" },
-                  ].map((item) => (
-                    <li key={item.key} className="flex gap-3">
-                      <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                      <span>
-                        {TRN(
-                          `providers.apply.include.${item.key}`,
-                          item.text,
-                          null,
-                          "Apply checklist item. Keep it specific."
-                        )}
-                      </span>
-                    </li>
-                  ))}
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.apply.include.category",
+                        "Product category (POS, ordering, payments, etc.)",
+                        null,
+                        "Apply checklist item. Keep it specific."
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.apply.include.markets",
+                        "Markets and operator profiles you serve",
+                        null,
+                        "Apply checklist item. Keep it specific."
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.apply.include.integrations",
+                        "Integration docs or an overview of your API and partners",
+                        null,
+                        "Apply checklist item. Keep it specific."
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>
+                      {TRN(
+                        "providers.apply.include.support",
+                        "Your support and escalation model",
+                        null,
+                        "Apply checklist item. Keep it specific."
+                      )}
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -396,4 +534,3 @@ export function ProvidersMessage() {
     </div>
   )
 }
-
