@@ -14,20 +14,14 @@ export function Footer() {
   }
 
   const footerLinks = {
-    company: [
-      { label: TRN("footer.links.about", "About us"), href: `/${locale}/about` },
-      { label: TRN("footer.links.services", "Services"), href: `/${locale}#services` },
+    restaurants: [
+      { label: TRN("footer.links.what", "What we do"), href: `/${locale}#what-we-do` },
+      { label: TRN("footer.links.how", "How we work"), href: `/${locale}#process` },
+      { label: TRN("footer.links.support", "Support"), href: `/${locale}#support` },
       { label: TRN("footer.links.contact", "Contact"), href: `/${locale}#contact` },
     ],
-    resources: [
-      { label: TRN("footer.links.blog", "Blog"), href: `/${locale}/blog` },
-      { label: TRN("footer.links.case-studies", "Case studies"), href: `/${locale}/case-studies` },
-      { label: TRN("footer.links.documentation", "Documentation"), href: `/${locale}/docs` },
-    ],
-    legal: [
-      { label: TRN("footer.links.privacy", "Privacy policy"), href: `/${locale}/privacy` },
-      { label: TRN("footer.links.terms", "Terms of service"), href: `/${locale}/terms` },
-      { label: TRN("footer.links.cookies", "Cookie policy"), href: `/${locale}/cookies` },
+    providers: [
+      { label: TRN("footer.links.providers", "For providers"), href: `/${locale}/providers` },
     ],
   }
 
@@ -40,7 +34,7 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-16 md:py-20">
         {/* Main footer content */}
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
           <div className="lg:col-span-2">
             <Image
@@ -53,9 +47,9 @@ export function Footer() {
             <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
               {TRN(
                 "footer.description",
-                "End-to-end technology services for the hospitality industry. Implementation, integration, and ongoing support.",
+                "End-to-end technology partner for restaurant operations. Implementation, vendor coordination, and ongoing support.",
                 null,
-                "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
+                "Footer short description for restaurant operators. Operational tone."
               )}
             </p>
 
@@ -120,13 +114,13 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Company links */}
+          {/* Restaurants links */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-              {TRN("footer.sections.company", "Company")}
+              {TRN("footer.sections.restaurants", "Restaurants")}
             </h3>
             <ul className="mt-4 space-y-3">
-              {footerLinks.company.map((link, index) => (
+              {footerLinks.restaurants.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -139,13 +133,13 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources links */}
+          {/* Providers links (secondary) */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-              {TRN("footer.sections.resources", "Resources")}
+              {TRN("footer.sections.providers", "Providers")}
             </h3>
             <ul className="mt-4 space-y-3">
-              {footerLinks.resources.map((link, index) => (
+              {footerLinks.providers.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -156,25 +150,14 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Legal links */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-              {TRN("footer.sections.legal", "Legal")}
-            </h3>
-            <ul className="mt-4 space-y-3">
-              {footerLinks.legal.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+              {TRN(
+                "footer.providers.note",
+                "Implementation and support in real restaurants. Selective, operational, and accountable.",
+                null,
+                "Short note under the providers link. Serious tone."
+              )}
+            </p>
           </div>
         </div>
 

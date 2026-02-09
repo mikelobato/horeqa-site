@@ -1,7 +1,7 @@
 "use client"
 
 import { useTRN } from "@/contexts/LanguageContext"
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export function Hero() {
@@ -13,7 +13,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative flex min-h-[calc(100vh-80px)] items-center overflow-hidden bg-gradient-to-b from-white via-primary-light/20 to-white pt-20 pb-16">
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-gradient-to-b from-white via-primary-light/20 to-white pt-24 pb-16">
       {/* Advanced background accents */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-r from-primary/20 via-accent/15 to-primary/20 blur-3xl animate-float" />
@@ -45,9 +45,9 @@ export function Hero() {
               <span className="block">
                 {TRN(
                   "hero.title",
-                  "Hospitality technology, executed end to end.",
+                  "Your technology partner for the restaurant's day-to-day.",
                   null,
-                  "Hero headline. Serious, operational tone. Translate 'hospitality' as the industry term (Spanish should use 'hosteleria', not 'hospitalidad')."
+                  "Hero headline for restaurant operators. Serious, operational tone."
                 )}
               </span>
             </h1>
@@ -56,27 +56,21 @@ export function Hero() {
             <p className={`mx-auto mt-6 max-w-3xl text-pretty text-base leading-relaxed text-muted-foreground transition-all duration-700 delay-200 md:text-lg lg:text-xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               {TRN(
                 "hero.subtitle",
-                "We take ownership of the rollout: analysis, stack design, vendor coordination, go-live, and ongoing support. One partner. Clear responsibility.",
+                "We select, implement, and operate your technology: ordering, POS, payments, delivery, reservations, menus, and back office. One contact. One accountable owner.",
                 null,
-                "Two short sentences. Avoid buzzwords and exaggerated claims. Keep it aligned with the operator message on the page."
+                "Two short sentences. Operational language. Avoid SaaS hype."
               )}
             </p>
 
-            {/* Key points */}
-            <div className={`mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground transition-all duration-700 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>{TRN("hero.keyPoint1", "Full stack implementation")}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>{TRN("hero.keyPoint2", "24/7 Support")}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>{TRN("hero.keyPoint3", "Vendor coordination")}</span>
-              </div>
-            </div>
+            {/* Trust note */}
+            <p className={`mx-auto mt-5 max-w-3xl text-pretty text-sm leading-relaxed text-foreground/80 transition-all duration-700 delay-300 md:text-base ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              {TRN(
+                "hero.note",
+                "If something breaks, you call us. We coordinate vendors and get it resolved.",
+                null,
+                "Short trust line. Confident, no exaggeration."
+              )}
+            </p>
 
             {/* CTAs */}
             <div className={`mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row transition-all duration-700 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -86,36 +80,18 @@ export function Hero() {
               >
                 {TRN(
                   "hero.cta",
-                  "Start a project",
+                  "Talk to Horeqa",
                   null,
-                  "Primary CTA for restaurants/operators. Do not translate as generic 'Contact us' if a better local equivalent exists."
+                  "Primary CTA for restaurant operators. Keep it direct."
                 )}
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
               <a
-                href="#operators"
+                href="#process"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-primary/20 bg-white/80 px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-white hover:shadow-lg sm:w-auto"
               >
-                {TRN("hero.ctaSecondary", "How we work")}
+                {TRN("hero.ctaSecondary", "See how we work")}
               </a>
-            </div>
-
-            {/* Trust indicators */}
-            <div className={`mt-12 flex flex-col items-center gap-4 transition-all duration-700 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                {TRN(
-                  "hero.trustedBy",
-                  "Trusted by leading hospitality operators",
-                  null,
-                  "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
-                )}
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-                {/* Placeholder for client logos - you can add actual logos later */}
-                <div className="h-8 w-24 rounded bg-gradient-to-r from-muted to-muted-foreground/20" />
-                <div className="h-8 w-24 rounded bg-gradient-to-r from-muted to-muted-foreground/20" />
-                <div className="h-8 w-24 rounded bg-gradient-to-r from-muted to-muted-foreground/20" />
-              </div>
             </div>
           </div>
         </div>

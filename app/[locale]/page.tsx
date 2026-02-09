@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
-import { Stats } from "@/components/stats";
-import { OperatorMessage } from "@/components/operator-message";
 import { Services } from "@/components/services";
 import { Clients } from "@/components/clients";
 import { Process } from "@/components/process";
-import { Positioning } from "@/components/positioning";
+import { Support } from "@/components/support";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { normalizeLocale, type Language } from "@/lib/i18n";
@@ -70,12 +68,10 @@ export default function Page() {
       <Header />
       <main>
         <Hero />
-        <Stats />
-        <OperatorMessage />
         <Services />
         <Clients />
         <Process />
-        <Positioning />
+        <Support />
         <Contact />
       </main>
       <Footer />

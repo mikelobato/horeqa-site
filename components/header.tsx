@@ -30,25 +30,21 @@ export function Header() {
   }
 
   const navLinks = [
-    { label: TRN("nav.restaurants", "For restaurants"), href: `/${locale}` },
-    { label: TRN("nav.providers", "For providers"), href: `/${locale}/providers` },
+    { label: TRN("nav.what", "What we do"), href: `/${locale}#what-we-do` },
+    { label: TRN("nav.how", "How we work"), href: `/${locale}#process` },
+    { label: TRN("nav.support", "Support"), href: `/${locale}#support` },
+    { label: TRN("nav.contact", "Contact"), href: `/${locale}#contact` },
   ]
 
-  const isProvidersPage = pathname?.includes("/providers") ?? false
-  const primaryCta = isProvidersPage
-    ? {
-        href: `/${locale}/providers#apply`,
-        label: TRN(
-          "nav.cta.providers",
-          "Apply as a provider",
-          null,
-          "Header CTA when on the providers page. Must not be a generic 'Contact us'."
-        ),
-      }
-    : {
-        href: `/${locale}#contact`,
-        label: TRN("nav.cta", "Contact us"),
-      }
+  const primaryCta = {
+    href: `/${locale}#contact`,
+    label: TRN(
+      "nav.cta",
+      "Talk to Horeqa",
+      null,
+      "Primary header CTA for restaurant operators. Avoid generic 'Contact us' if there is a better local equivalent."
+    ),
+  }
 
   return (
     <header
@@ -58,7 +54,7 @@ export function Header() {
           : "bg-white/80 py-4 backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-6">
+      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center px-6 md:grid-cols-[1fr_auto_1fr]">
         {/* Left: logo */}
         <div className="flex items-center justify-start">
           <a 

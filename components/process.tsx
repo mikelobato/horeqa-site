@@ -10,48 +10,68 @@ export function Process() {
     {
       number: "01",
       icon: Search,
-      title: TRN("process.steps.discover.title", "Understand the operation", null, "Step title. Short sentence."),
+      title: TRN(
+        "process.steps.discover.title",
+        "Operational diagnosis",
+        null,
+        "Step title for restaurants. Keep it concrete and operational."
+      ),
       description: TRN(
         "process.steps.discover.description",
-        "We study your business, workflows, and current technology landscape.",
+        "We understand how you actually work: your team, peaks, and pain points.",
         null,
-        "Step description. Operational tone."
+        "Step description. Restaurant context. Avoid jargon."
       ),
       gradient: "from-blue-500 to-cyan-500",
     },
     {
       number: "02",
       icon: Layout,
-      title: TRN("process.steps.design.title", "Design the tech stack", null, "Step title. Short sentence."),
+      title: TRN(
+        "process.steps.design.title",
+        "Stack decision",
+        null,
+        "Step title for restaurants. Short noun phrase."
+      ),
       description: TRN(
         "process.steps.design.description",
-        "We architect the right combination of platforms and integrations for your needs.",
+        "We decide what stays, what goes, and what is missing to operate smoothly.",
         null,
-        "Step description. Keep it specific."
+        "Step description. Focus on day-to-day operations."
       ),
       gradient: "from-violet-500 to-purple-500",
     },
     {
       number: "03",
       icon: Rocket,
-      title: TRN("process.steps.implement.title", "Implement and integrate", null, "Step title. Avoid ampersands."),
+      title: TRN(
+        "process.steps.implement.title",
+        "Implementation and go-live",
+        null,
+        "Step title. Restaurant language. Avoid buzzwords."
+      ),
       description: TRN(
         "process.steps.implement.description",
-        "We deploy, configure, and connect all systems for a seamless operation.",
+        "We configure, integrate, train the team, and run the go-live with you.",
         null,
-        "Step description. Operational tone."
+        "Step description. Concrete actions."
       ),
       gradient: "from-emerald-500 to-green-500",
     },
     {
       number: "04",
       icon: LifeBuoy,
-      title: TRN("process.steps.support.title", "Support and optimize", null, "Step title. Avoid ampersands."),
+      title: TRN(
+        "process.steps.support.title",
+        "Support and continuous improvement",
+        null,
+        "Step title. Restaurant context. Avoid SaaS language."
+      ),
       description: TRN(
         "process.steps.support.description",
-        "We provide ongoing monitoring, optimization, and vendor coordination.",
+        "We run the day-to-day: incidents, menu changes, new integrations, and optimization.",
         null,
-        "Step description. Operational tone."
+        "Step description. Match the restaurant reality."
       ),
       gradient: "from-amber-500 to-orange-500",
     },
@@ -133,13 +153,18 @@ export function Process() {
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <p className="text-lg text-muted-foreground">
-            {TRN("process.ctaText", "Ready to streamline your technology stack?")}
+            {TRN(
+              "process.ctaText",
+              "Want one partner to take responsibility for your technology day to day?",
+              null,
+              "CTA prompt. Restaurant operator tone."
+            )}
           </p>
           <a
             href="#contact"
             className="mt-6 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-accent px-8 py-3 font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/30"
           >
-            {TRN("process.cta", "Get started today")}
+            {TRN("process.cta", "Talk to Horeqa", null, "CTA button. Keep it direct.")}
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

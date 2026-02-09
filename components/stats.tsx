@@ -136,7 +136,7 @@ export function Stats() {
               "stats.tagline",
               "Trusted by leading hospitality operators across the industry",
               null,
-              "Translate 'hospitality' as the industry term: Spanish should use 'hostelería' (not 'hospitalidad')."
+              "Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad')."
             )}
           </p>
         </div>
