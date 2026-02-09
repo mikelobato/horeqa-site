@@ -13,7 +13,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-gradient-to-b from-white via-primary-light/20 to-white pt-24 pb-16">
+    <section className="relative min-h-[100svh] overflow-hidden bg-gradient-to-b from-white via-primary-light/20 to-white pt-24 md:pt-28 pb-16">
       {/* Advanced background accents */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-r from-primary/20 via-accent/15 to-primary/20 blur-3xl animate-float" />
@@ -25,7 +25,7 @@ export function Hero() {
       </div>
 
       <div className="relative w-full">
-        <div className="mx-auto max-w-7xl px-6 py-12 md:py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-0">
           <div className="mx-auto max-w-4xl text-center">
             {/* Badge/Eyebrow */}
             <div className={`inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/80 px-4 py-2 backdrop-blur-sm transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -41,7 +41,7 @@ export function Hero() {
             </div>
 
             {/* Main heading */}
-            <h1 className={`mt-6 text-balance text-4xl font-bold leading-tight tracking-tight text-foreground transition-all duration-700 delay-100 md:text-5xl lg:text-6xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <h1 className={`mt-6 text-balance text-5xl font-bold leading-tight tracking-tight text-foreground transition-all duration-700 delay-100 md:text-6xl lg:text-7xl ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <span className="block">
                 {TRN(
                   "hero.title",

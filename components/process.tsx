@@ -12,15 +12,15 @@ export function Process() {
       icon: Search,
       title: TRN(
         "process.steps.discover.title",
-        "Operational diagnosis",
+        "We understand your operation",
         null,
-        "Step title for restaurants. Keep it concrete and operational."
+        "Step title. Restaurant operator tone. Avoid sounding like a consultancy."
       ),
       description: TRN(
         "process.steps.discover.description",
-        "We understand how you actually work: your team, peaks, and pain points.",
+        "We start by understanding how your restaurant really works: service model, team, peak hours, current tools and daily pain points. No generic setups, no assumptions.",
         null,
-        "Step description. Restaurant context. Avoid jargon."
+        "Step description. Plain, direct language. No SaaS hype."
       ),
       gradient: "from-blue-500 to-cyan-500",
     },
@@ -29,15 +29,15 @@ export function Process() {
       icon: Layout,
       title: TRN(
         "process.steps.design.title",
-        "Stack decision",
+        "We take ownership of your technology",
         null,
-        "Step title for restaurants. Short noun phrase."
+        "Step title. Emphasize ownership and responsibility."
       ),
       description: TRN(
         "process.steps.design.description",
-        "We decide what stays, what goes, and what is missing to operate smoothly.",
+        "We define the right tech stack for your operation, keep what works, replace what doesn’t, and coordinate all the tools involved: ordering, POS, payments, delivery, menus and back office.",
         null,
-        "Step description. Focus on day-to-day operations."
+        "Step description. Mention the categories. Keep it operational."
       ),
       gradient: "from-violet-500 to-purple-500",
     },
@@ -46,15 +46,15 @@ export function Process() {
       icon: Rocket,
       title: TRN(
         "process.steps.implement.title",
-        "Implementation and go-live",
+        "We implement and go live with you",
         null,
-        "Step title. Restaurant language. Avoid buzzwords."
+        "Step title. Restaurant operator tone. Keep it concrete."
       ),
       description: TRN(
         "process.steps.implement.description",
-        "We configure, integrate, train the team, and run the go-live with you.",
+        "We configure everything, connect the systems, train your team and manage the go-live. You don’t deal with multiple vendors or setups. We do.",
         null,
-        "Step description. Concrete actions."
+        "Step description. Two short sentences. Avoid jargon."
       ),
       gradient: "from-emerald-500 to-green-500",
     },
@@ -63,15 +63,15 @@ export function Process() {
       icon: LifeBuoy,
       title: TRN(
         "process.steps.support.title",
-        "Support and continuous improvement",
+        "We operate and support the day-to-day",
         null,
-        "Step title. Restaurant context. Avoid SaaS language."
+        "Step title. Emphasize day-to-day operations and support."
       ),
       description: TRN(
         "process.steps.support.description",
-        "We run the day-to-day: incidents, menu changes, new integrations, and optimization.",
+        "Once live, Horeqa becomes your single point of contact. Incidents, changes, improvements or scaling. We handle it and coordinate with providers when needed.",
         null,
-        "Step description. Match the restaurant reality."
+        "Step description. Short sentences. Operational tone."
       ),
       gradient: "from-amber-500 to-orange-500",
     },
@@ -89,10 +89,15 @@ export function Process() {
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="text-center">
           <p className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-primary">
-            {TRN("process.eyebrow", "How we work")}
+            {TRN("process.eyebrow", "How it works")}
           </p>
           <h2 className="mt-4 text-balance text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-            {TRN("process.title", "A clear, structured approach.")}
+            {TRN(
+              "process.title",
+              "A simple model, built for real restaurant operations.",
+              null,
+              "Subtitle-style section title. Keep it straightforward and credible."
+            )}
           </h2>
         </div>
 
@@ -150,25 +155,16 @@ export function Process() {
           })}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Closing line */}
         <div className="mt-16 text-center">
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl font-semibold text-foreground md:text-2xl">
             {TRN(
-              "process.ctaText",
-              "Want one partner to take responsibility for your technology day to day?",
+              "process.closing",
+              "One partner. One conversation. One responsible team.",
               null,
-              "CTA prompt. Restaurant operator tone."
+              "Closing line. Strong, short, confident."
             )}
           </p>
-          <a
-            href="#contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-accent px-8 py-3 font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/30"
-          >
-            {TRN("process.cta", "Talk to Horeqa", null, "CTA button. Keep it direct.")}
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
         </div>
       </div>
     </section>
