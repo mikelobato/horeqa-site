@@ -72,7 +72,7 @@ export function Header() {
           : "bg-white/80 py-4 backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center px-6 md:grid-cols-[1fr_auto_1fr]">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6">
         {/* Left: logo */}
         <div className="flex items-center justify-start">
           <a 
@@ -91,9 +91,9 @@ export function Header() {
           </a>
         </div>
 
-        {/* Center: desktop menu */}
+        {/* Center: desktop menu (true center, independent from right-side width) */}
         <nav
-          className="hidden items-center justify-center gap-8 md:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center justify-center gap-8 md:flex"
           aria-label={TRN(
             "nav.aria.main",
             "Main navigation",
@@ -130,7 +130,7 @@ export function Header() {
                 id="language-select"
                 value={locale}
                 onChange={(event) => handleLocaleChange(event.target.value)}
-                className="cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="max-w-[220px] cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/20"
               >
                 {SUPPORTED_REGION_LOCALES.map((loc) => (
                   <option key={loc} value={loc}>
@@ -159,7 +159,7 @@ export function Header() {
               id="language-select-mobile-bar"
               value={locale}
               onChange={(event) => handleLocaleChange(event.target.value)}
-              className="cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="max-w-[200px] cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
             >
               {SUPPORTED_REGION_LOCALES.map((loc) => (
                 <option key={loc} value={loc}>
