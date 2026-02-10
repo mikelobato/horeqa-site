@@ -5,7 +5,25 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { useLocale, useTRN } from "@/contexts/LanguageContext"
-import { SUPPORTED_LOCALES } from "@/translations"
+import { SUPPORTED_REGION_LOCALES } from "@/config/site-locales"
+
+function getLocaleLabel(localeSegment: string): string {
+  const seg = (localeSegment || "").toLowerCase()
+  const m = seg.match(/^([a-z]{2})-([a-z]{2})$/i)
+  if (!m) return seg.toUpperCase()
+
+  const lang = m[1]!
+  const region = m[2]!.toUpperCase()
+
+  try {
+    const langName = new Intl.DisplayNames([seg], { type: "language" }).of(lang) || lang
+    const regionName = new Intl.DisplayNames([seg], { type: "region" }).of(region) || region
+    const niceLangName = langName.charAt(0).toUpperCase() + langName.slice(1)
+    return `${niceLangName} (${regionName})`
+  } catch {
+    return `${lang.toUpperCase()} (${region})`
+  }
+}
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -22,10 +40,10 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleLanguageChange = (newLocale: string) => {
+  const handleLocaleChange = (nextLocaleSegment: string) => {
     const currentPath = pathname || `/${locale}`
-    const pathWithoutLocale = currentPath.replace(/^\/[a-z]{2}(\/|$)/, '/')
-    const newPath = `/${newLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
+    const pathWithoutLocale = currentPath.replace(/^\/[a-z]{2}(?:-[a-z]{2})?(\/|$)/, "/")
+    const newPath = `/${nextLocaleSegment}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`
     window.location.href = newPath
   }
 
@@ -111,12 +129,12 @@ export function Header() {
               <select
                 id="language-select"
                 value={locale}
-                onChange={(event) => handleLanguageChange(event.target.value)}
+                onChange={(event) => handleLocaleChange(event.target.value)}
                 className="cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/20"
               >
-                {SUPPORTED_LOCALES.map((lang) => (
-                  <option key={lang} value={lang}>
-                    {lang.toUpperCase()}
+                {SUPPORTED_REGION_LOCALES.map((loc) => (
+                  <option key={loc} value={loc}>
+                    {getLocaleLabel(loc)}
                   </option>
                 ))}
               </select>
@@ -140,12 +158,12 @@ export function Header() {
             <select
               id="language-select-mobile-bar"
               value={locale}
-              onChange={(event) => handleLanguageChange(event.target.value)}
+              onChange={(event) => handleLocaleChange(event.target.value)}
               className="cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
             >
-              {SUPPORTED_LOCALES.map((lang) => (
-                <option key={lang} value={lang}>
-                  {lang.toUpperCase()}
+              {SUPPORTED_REGION_LOCALES.map((loc) => (
+                <option key={loc} value={loc}>
+                  {getLocaleLabel(loc)}
                 </option>
               ))}
             </select>

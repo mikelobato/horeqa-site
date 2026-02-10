@@ -16,7 +16,10 @@ export function stripLocaleFromPath(pathname: string): string {
   let index = 0;
   while (index < parts.length) {
     const segment = parts[index];
-    if (SUPPORTED_LANGS.includes(segment as Language)) {
+    const isLangOnly = SUPPORTED_LANGS.includes(segment as Language);
+    const isRegionLocale =
+      /^[a-z]{2}-[a-z]{2}$/i.test(segment) && SUPPORTED_LANGS.includes(segment.slice(0, 2) as Language);
+    if (isLangOnly || isRegionLocale) {
       index += 1;
       continue;
     }

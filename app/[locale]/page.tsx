@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer";
 import { normalizeLocale, type Language } from "@/lib/i18n";
 import { createTrn } from "@/lib/trn";
 import { META_TRANSLATIONS } from "@/translations/meta";
+import { buildHreflangAlternates, canonicalLocaleSegment } from "@/config/site-locales";
 
 export async function generateMetadata({
   params,
@@ -17,13 +18,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  const locale = normalizeLocale(localeParam) as Language;
+  const localeSegment = (localeParam || "en").toLowerCase();
+  const locale = normalizeLocale(localeSegment) as Language;
   const TRN = createTrn(META_TRANSLATIONS[locale] ?? META_TRANSLATIONS.en);
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.NODE_ENV === "production" ? "https://www.horeqa.com" : "https://dev-www.horeqa.com");
-  const canonicalUrl = `${baseUrl}/${locale}`;
+  const baseUrl = "https://www.horeqa.com";
+  const canonicalUrl = `${baseUrl}/${canonicalLocaleSegment(localeSegment)}`;
   const title = TRN(
     "meta.home.title",
     "Technology partner for modern hospitality",
@@ -54,10 +54,7 @@ export async function generateMetadata({
     },
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        en: `${baseUrl}/en`,
-        es: `${baseUrl}/es`,
-      },
+      languages: buildHreflangAlternates(baseUrl, ""),
     },
   };
 }

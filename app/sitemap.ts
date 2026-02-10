@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SUPPORTED_LOCALES } from "@/translations/locales";
+import { buildHreflangAlternates, SUPPORTED_REGION_LOCALES } from "@/config/site-locales";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -12,12 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  SUPPORTED_LOCALES.forEach((locale) => {
+  const locales = Array.from(new Set<string>([...SUPPORTED_LOCALES, ...SUPPORTED_REGION_LOCALES]));
+
+  locales.forEach((locale) => {
     routes.forEach((route) => {
-      const languages = SUPPORTED_LOCALES.reduce<Record<string, string>>((acc, lang) => {
-        acc[lang] = `${baseUrl}/${lang}${route}`;
-        return acc;
-      }, {});
+      const languages = buildHreflangAlternates(baseUrl, route);
 
       sitemapEntries.push({
         url: `${baseUrl}/${locale}${route}`,

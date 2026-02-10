@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { SUPPORTED_LOCALES } from "@/translations/locales";
+import { DEFAULT_LOCALE_BY_LANG, SUPPORTED_REGION_LOCALES } from "@/config/site-locales";
 
 export default function RootPage() {
   const router = useRouter();
@@ -17,20 +17,19 @@ export default function RootPage() {
 
 function pickPreferredLocale(languages: readonly string[] | undefined): string {
   if (!languages || languages.length === 0) {
-    return "en";
+    return DEFAULT_LOCALE_BY_LANG.en;
   }
   for (const candidate of languages) {
     const normalized = candidate.toLowerCase();
-    const exact = SUPPORTED_LOCALES.find((locale) => normalized === locale);
-    if (exact) {
-      return exact;
-    }
-    const prefix = SUPPORTED_LOCALES.find(
-      (locale) => normalized.startsWith(`${locale}-`) || normalized.startsWith(`${locale}_`)
-    );
-    if (prefix) {
-      return prefix;
+    // Prefer an exact supported region locale first (e.g. "es-es").
+    const exactRegion = SUPPORTED_REGION_LOCALES.find((loc) => normalized === loc);
+    if (exactRegion) return exactRegion;
+
+    // Otherwise fall back to language -> default region.
+    const lang = normalized.slice(0, 2);
+    if (lang in DEFAULT_LOCALE_BY_LANG) {
+      return (DEFAULT_LOCALE_BY_LANG as Record<string, string>)[lang];
     }
   }
-  return "en";
+  return DEFAULT_LOCALE_BY_LANG.en;
 }

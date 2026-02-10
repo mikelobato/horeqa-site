@@ -3,6 +3,11 @@ import type { Metadata } from "next";
 import { AppProviders } from "@/components/AppProviders";
 import { normalizeLocale, type Language } from "@/lib/i18n";
 import { SUPPORTED_LOCALES } from "@/translations/locales";
+import {
+  buildHreflangAlternates,
+  canonicalLocaleSegment,
+  SUPPORTED_REGION_LOCALES,
+} from "@/config/site-locales";
 
 export async function generateMetadata({
   params,
@@ -10,17 +15,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  const locale = normalizeLocale(localeParam) as Language;
+  const localeSegment = (localeParam || "en").toLowerCase();
+  const locale = normalizeLocale(localeSegment) as Language;
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.NODE_ENV === "production" ? "https://www.horeqa.com" : "https://dev-www.horeqa.com");
-  const canonicalUrl = `${baseUrl}/${locale}`;
+  // Use the canonical production domain for hreflang + canonical.
+  const baseUrl = "https://www.horeqa.com";
+  const canonicalUrl = `${baseUrl}/${canonicalLocaleSegment(localeSegment)}`;
 
-  const languages = SUPPORTED_LOCALES.reduce<Record<string, string>>((acc, lang) => {
-    acc[lang] = `${baseUrl}/${lang}`;
-    return acc;
-  }, {});
+  const languages = buildHreflangAlternates(baseUrl, "");
 
   return {
     metadataBase: new URL(baseUrl),
@@ -32,7 +34,8 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+  const locales = Array.from(new Set<string>([...SUPPORTED_LOCALES, ...SUPPORTED_REGION_LOCALES]));
+  return locales.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
