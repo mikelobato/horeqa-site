@@ -6,6 +6,7 @@ import { SUPPORTED_LOCALES } from "@/translations/locales";
 import {
   buildHreflangAlternates,
   canonicalLocaleSegment,
+  isLanguageOnlyLocaleSegment,
   SUPPORTED_REGION_LOCALES,
 } from "@/config/site-locales";
 
@@ -26,6 +27,12 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(baseUrl),
+    robots: isLanguageOnlyLocaleSegment(localeSegment)
+      ? {
+          index: false,
+          follow: true,
+        }
+      : undefined,
     alternates: {
       canonical: canonicalUrl,
       languages,

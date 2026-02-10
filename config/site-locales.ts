@@ -16,6 +16,13 @@ export const DEFAULT_LOCALE_BY_LANG: Record<Lang, string> = {
 
 export const SUPPORTED_REGION_LOCALES = Object.values(DEFAULT_LOCALE_BY_LANG);
 
+export function isLanguageOnlyLocaleSegment(localeSegment: string): boolean {
+  const value = (localeSegment || "").toLowerCase();
+  const m = value.match(/^([a-z]{2})$/);
+  if (!m) return false;
+  return m[1] in DEFAULT_LOCALE_BY_LANG;
+}
+
 export function canonicalLocaleSegment(localeSegment: string): string {
   const value = (localeSegment || "en").toLowerCase();
   const m = value.match(/^([a-z]{2})$/);

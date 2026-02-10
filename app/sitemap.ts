@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { SUPPORTED_LOCALES } from "@/translations/locales";
 import { buildHreflangAlternates, SUPPORTED_REGION_LOCALES } from "@/config/site-locales";
 
 export const dynamic = "force-static";
@@ -13,7 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  const locales = Array.from(new Set<string>([...SUPPORTED_LOCALES, ...SUPPORTED_REGION_LOCALES]));
+  // Only publish canonical region locales in the sitemap to avoid duplicates like "/es" vs "/es-es".
+  const locales = SUPPORTED_REGION_LOCALES;
 
   locales.forEach((locale) => {
     routes.forEach((route) => {
