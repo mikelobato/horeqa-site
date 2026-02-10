@@ -3,9 +3,18 @@
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
+import { ChevronDown, Globe, Menu, X } from "lucide-react"
 import { useLocale, useTRN } from "@/contexts/LanguageContext"
 import { SUPPORTED_REGION_LOCALES } from "@/config/site-locales"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 function getLocaleLabel(localeSegment: string): string {
   const seg = (localeSegment || "").toLowerCase()
@@ -28,6 +37,7 @@ function getLocaleLabel(localeSegment: string): string {
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [localeModalOpen, setLocaleModalOpen] = useState(false)
   const TRN = useTRN()
   const locale = useLocale()
   const pathname = usePathname()
@@ -63,6 +73,8 @@ export function Header() {
       "Primary header CTA for restaurant operators. Avoid generic 'Contact us' if there is a better local equivalent."
     ),
   }
+
+  const localeCode = (locale || "").toUpperCase()
 
   return (
     <header
@@ -122,23 +134,75 @@ export function Header() {
               <span className="relative z-10">{primaryCta.label}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 transition-opacity group-hover:opacity-100" />
             </a>
-            <div className="flex items-center gap-2">
-              <label htmlFor="language-select" className="sr-only">
-                {TRN("nav.language", "Language")}
-              </label>
-              <select
-                id="language-select"
-                value={locale}
-                onChange={(event) => handleLocaleChange(event.target.value)}
-                className="max-w-[220px] cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/20"
-              >
-                {SUPPORTED_REGION_LOCALES.map((loc) => (
-                  <option key={loc} value={loc}>
-                    {getLocaleLabel(loc)}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <Dialog open={localeModalOpen} onOpenChange={setLocaleModalOpen}>
+              <DialogTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  aria-label={TRN(
+                    "nav.localeSwitcher",
+                    "Change language and country",
+                    null,
+                    "ARIA label for the locale switcher button."
+                  )}
+                  className="h-10 gap-2 rounded-lg bg-white px-3 text-xs font-semibold text-foreground hover:bg-primary/5"
+                >
+                  <Globe className="h-4 w-4 text-muted-foreground" />
+                  <span className="tabular-nums">{localeCode}</span>
+                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-xl">
+                <DialogHeader>
+                  <DialogTitle>
+                    {TRN("locale.modal.title", "Choose your locale", null, "Modal title for locale selection.")}
+                  </DialogTitle>
+                  <DialogDescription>
+                    {TRN(
+                      "locale.modal.subtitle",
+                      "Select language and country. You will stay on the same page when available.",
+                      null,
+                      "Modal subtitle. Keep it short."
+                    )}
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {SUPPORTED_REGION_LOCALES.map((loc) => {
+                    const selected = loc === (locale || "").toLowerCase()
+                    return (
+                      <button
+                        key={loc}
+                        type="button"
+                        onClick={() => {
+                          setLocaleModalOpen(false)
+                          handleLocaleChange(loc)
+                        }}
+                        className={`flex items-center justify-between rounded-lg border px-4 py-3 text-left transition-colors ${
+                          selected
+                            ? "border-primary bg-primary/5"
+                            : "border-border bg-white hover:bg-secondary/40"
+                        }`}
+                      >
+                        <div className="min-w-0">
+                          <div className="truncate text-sm font-semibold text-foreground">
+                            {getLocaleLabel(loc)}
+                          </div>
+                          <div className="mt-1 text-xs text-muted-foreground">
+                            {TRN("locale.modal.code", "ISO code", null, "Small label for ISO code.")}:{" "}
+                            <span className="tabular-nums">{loc.toUpperCase()}</span>
+                          </div>
+                        </div>
+                        <span className="ml-3 shrink-0 rounded-md bg-secondary px-2 py-1 text-[11px] font-semibold text-foreground">
+                          {loc.toUpperCase()}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
 
           <div className="flex items-center gap-3 md:hidden">
@@ -152,21 +216,72 @@ export function Header() {
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
-            <label htmlFor="language-select-mobile-bar" className="sr-only">
-              {TRN("nav.language", "Language")}
-            </label>
-            <select
-              id="language-select-mobile-bar"
-              value={locale}
-              onChange={(event) => handleLocaleChange(event.target.value)}
-              className="max-w-[200px] cursor-pointer rounded-lg border border-input bg-white px-3 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
-            >
-              {SUPPORTED_REGION_LOCALES.map((loc) => (
-                <option key={loc} value={loc}>
-                  {getLocaleLabel(loc)}
-                </option>
-              ))}
-            </select>
+            <Dialog open={localeModalOpen} onOpenChange={setLocaleModalOpen}>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  aria-label={TRN(
+                    "nav.localeSwitcher",
+                    "Change language and country",
+                    null,
+                    "ARIA label for the locale switcher button."
+                  )}
+                  className="flex items-center gap-1 rounded-lg border border-input bg-white px-2.5 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary/50"
+                >
+                  <span className="tabular-nums">{localeCode}</span>
+                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-w-xl">
+                <DialogHeader>
+                  <DialogTitle>
+                    {TRN("locale.modal.title", "Choose your locale", null, "Modal title for locale selection.")}
+                  </DialogTitle>
+                  <DialogDescription>
+                    {TRN(
+                      "locale.modal.subtitle",
+                      "Select language and country. You will stay on the same page when available.",
+                      null,
+                      "Modal subtitle. Keep it short."
+                    )}
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid gap-2">
+                  {SUPPORTED_REGION_LOCALES.map((loc) => {
+                    const selected = loc === (locale || "").toLowerCase()
+                    return (
+                      <button
+                        key={loc}
+                        type="button"
+                        onClick={() => {
+                          setLocaleModalOpen(false)
+                          handleLocaleChange(loc)
+                        }}
+                        className={`flex items-center justify-between rounded-lg border px-4 py-3 text-left transition-colors ${
+                          selected
+                            ? "border-primary bg-primary/5"
+                            : "border-border bg-white hover:bg-secondary/40"
+                        }`}
+                      >
+                        <div className="min-w-0">
+                          <div className="truncate text-sm font-semibold text-foreground">
+                            {getLocaleLabel(loc)}
+                          </div>
+                          <div className="mt-1 text-xs text-muted-foreground">
+                            {TRN("locale.modal.code", "ISO code", null, "Small label for ISO code.")}:{" "}
+                            <span className="tabular-nums">{loc.toUpperCase()}</span>
+                          </div>
+                        </div>
+                        <span className="ml-3 shrink-0 rounded-md bg-secondary px-2 py-1 text-[11px] font-semibold text-foreground">
+                          {loc.toUpperCase()}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>
