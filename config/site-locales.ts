@@ -14,7 +14,36 @@ export const DEFAULT_LOCALE_BY_LANG: Record<Lang, string> = {
   zh: "zh-cn",
 };
 
-export const SUPPORTED_REGION_LOCALES = Object.values(DEFAULT_LOCALE_BY_LANG);
+export const SUPPORTED_REGION_LOCALES = [
+  "es-ar", // Argentina
+  "en-au", // Australia
+  "pt-br", // Brazil
+  "fr-be", // Belgium
+  "es-cl", // Chile
+  "es-co", // Colombia
+  "es-cr", // Costa Rica
+  "es-sv", // El Salvador
+  "es-es", // Spain
+  "en-us", // United States
+  "fr-fr", // France
+  "es-gt", // Guatemala
+  "es-hn", // Honduras
+  "en-ie", // Ireland
+  "it-it", // Italy
+  "ar-ma", // Morocco
+  "es-mx", // Mexico
+  "es-pe", // Peru
+  "pt-pt", // Portugal
+  "en-gb", // United Kingdom
+  "es-do", // Dominican Republic
+  "ar-tn", // Tunisia
+  "es-ve", // Venezuela
+  // Existing additional supported locales.
+  "ar-sa",
+  "ca-es",
+  "de-de",
+  "zh-cn",
+] as const;
 
 export function isLanguageOnlyLocaleSegment(localeSegment: string): boolean {
   const value = (localeSegment || "").toLowerCase();
