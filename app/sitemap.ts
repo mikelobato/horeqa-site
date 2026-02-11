@@ -7,29 +7,24 @@ export const revalidate = false;
 export default function sitemap(): MetadataRoute.Sitemap {
   // Always publish the production sitemap on the canonical www domain.
   const baseUrl = "https://www.horeqa.com";
+  const canonicalRoutes = ["", "/providers"] as const;
+  const canonicalLocales = Array.from(new Set<string>(SUPPORTED_REGION_LOCALES));
 
-  const routes = ["", "/providers"];
-
-  const sitemapEntries: MetadataRoute.Sitemap = [];
-
-  // Only publish canonical region locales in the sitemap to avoid duplicates like "/es" vs "/es-es".
-  const locales = SUPPORTED_REGION_LOCALES;
-
-  locales.forEach((locale) => {
-    routes.forEach((route) => {
-      const languages = buildHreflangAlternates(baseUrl, route);
-
-      sitemapEntries.push({
-        url: `${baseUrl}/${locale}${route}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: route === "" ? 1.0 : 0.8,
-        alternates: {
-          languages,
-        },
-      });
-    });
+  // Build alternates once per route to keep hreflang sets consistent across all locale variants.
+  const alternatesByRoute = new Map<string, Record<string, string>>();
+  canonicalRoutes.forEach((route) => {
+    alternatesByRoute.set(route, buildHreflangAlternates(baseUrl, route));
   });
 
-  return sitemapEntries;
+  return canonicalLocales.flatMap((locale) =>
+    canonicalRoutes.map((route) => ({
+      url: `${baseUrl}/${locale}${route}`,
+      lastModified: new Date(),
+      changeFrequency: route === "" ? "weekly" : "monthly",
+      priority: route === "" ? 1.0 : 0.7,
+      alternates: {
+        languages: alternatesByRoute.get(route)!,
+      },
+    }))
+  );
 }

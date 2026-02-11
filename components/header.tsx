@@ -216,14 +216,10 @@ export function Header() {
                           ? "border-primary bg-primary/5"
                           : "border-border bg-white hover:bg-secondary/40"
                       }`}
-                    >
+                      >
                       <div className="min-w-0">
                         <div className="truncate text-sm font-semibold text-foreground">
                           {getLocaleLabel(loc)}
-                        </div>
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          {TRN("locale.modal.code", "ISO code", null, "Small label for ISO code.")}:{" "}
-                          <span className="tabular-nums">{loc.toUpperCase()}</span>
                         </div>
                       </div>
                       <span className="ml-3 shrink-0 rounded-md bg-secondary px-2 py-1 text-[11px] font-semibold text-foreground">
