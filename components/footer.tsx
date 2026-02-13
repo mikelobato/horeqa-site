@@ -23,6 +23,9 @@ export function Footer() {
     providers: [
       { label: TRN("footer.links.providers", "For providers"), href: `/${locale}/providers` },
     ],
+    partners: [
+      { label: TRN("footer.links.partners", "For partners", null, "Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."), href: `/${locale}/partners` },
+    ],
   }
 
   return (
@@ -34,22 +37,28 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-16 md:py-20">
         {/* Main footer content */}
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <Image
-              src="/horeqa_logo_dark.svg"
-              alt={TRN("footer.logoAlt", "Horeqa logo")}
-              width={160}
-              height={28}
-              className="h-7 w-auto"
-            />
+            <a
+              href={`/${locale}`}
+              aria-label={TRN("footer.home", "Horeqa home")}
+              className="inline-block transition-transform hover:scale-105"
+            >
+              <Image
+                src="/horeqa_logo_dark.svg"
+                alt={TRN("footer.logoAlt", "Horeqa logo")}
+                width={132}
+                height={23}
+                className="h-5 w-auto"
+              />
+            </a>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
               {TRN(
                 "footer.description",
                 "End-to-end technology partner for restaurant operations. Implementation, vendor coordination, and ongoing support.",
                 null,
-                "Footer short description for restaurant operators. Operational tone."
+                "Footer short description for restaurant operators. Operational tone. Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."
               )}
             </p>
 
@@ -79,7 +88,7 @@ export function Footer() {
                   null,
                   "Social profile label for assistive tech."
                 )}
-                className="group flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-muted-foreground transition-all hover:border-primary/50 hover:bg-gradient-to-br hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
+                className="group flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-muted-foreground transition-all hover:border-primary/50 hover:bg-gradient-to-br hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
               >
                 <Instagram className="h-5 w-5" />
               </a>
@@ -93,7 +102,7 @@ export function Footer() {
                   null,
                   "Social profile label for assistive tech."
                 )}
-                className="group flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-muted-foreground transition-all hover:border-primary/50 hover:bg-black hover:text-white hover:shadow-lg"
+                className="group flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-muted-foreground transition-all hover:border-primary/50 hover:bg-black hover:text-white hover:shadow-lg"
               >
                 <Music2 className="h-5 w-5" />
               </a>
@@ -107,7 +116,7 @@ export function Footer() {
                   null,
                   "Social profile label for assistive tech."
                 )}
-                className="group flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-muted-foreground transition-all hover:border-primary/50 hover:bg-[#0077B5] hover:text-white hover:shadow-lg"
+                className="group flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-muted-foreground transition-all hover:border-primary/50 hover:bg-[#0077B5] hover:text-white hover:shadow-lg"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -159,6 +168,33 @@ export function Footer() {
               )}
             </p>
           </div>
+
+          {/* Partners links (secondary) */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
+              {TRN("footer.sections.partners", "Partners", null, "Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension.")}
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {footerLinks.partners.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+              {TRN(
+                "footer.partners.note",
+                "Structured growth model with onboarding, operational support, and continuous enablement.",
+                null,
+                "Short note under the partners link."
+              )}
+            </p>
+          </div>
         </div>
 
         {/* Bottom bar */}
@@ -175,7 +211,7 @@ export function Footer() {
             className="group flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
           >
             {TRN("footer.backToTop", "Back to top")}
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-white transition-all group-hover:border-primary/50 group-hover:bg-primary group-hover:text-white">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-white transition-all group-hover:border-primary/50 group-hover:bg-primary group-hover:text-white">
               <ArrowUp className="h-4 w-4" />
             </div>
           </button>

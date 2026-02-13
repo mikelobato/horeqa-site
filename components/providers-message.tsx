@@ -36,14 +36,14 @@ export function ProvidersMessage() {
                   "providers.hero.subheadline",
                   "Horeqa is an implementation and operations partner for selected hospitality technology providers. We work only with platforms that meet our technical and operational standards.",
                   null,
-                  "Two short sentences. No SaaS hype. Keep authority."
+                  "Two short sentences. No SaaS hype. Keep authority. Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."
                 )}
               </p>
 
               <div className="mt-10 flex flex-wrap gap-3">
                 <a
                   href="#apply"
-                  className="inline-flex items-center rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                  className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                   {TRN(
                     "providers.hero.ctaPrimary",
@@ -54,7 +54,7 @@ export function ProvidersMessage() {
                 </a>
                 <a
                   href="mailto:info@horeqa.com?subject=Provider%20application"
-                  className="inline-flex items-center rounded-md border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                  className="inline-flex items-center rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
                 >
                   {TRN(
                     "providers.hero.ctaSecondary",
@@ -352,19 +352,19 @@ export function ProvidersMessage() {
                 "providers.close.statement",
                 "Horeqa is not a generic reseller or a commoditized commercial channel. We are a demanding, specialized partner built for long-term collaboration and real hospitality operations.",
                 null,
-                "Two sentences. Strong positioning. No marketing fluff."
+                "Two sentences. Strong positioning. No marketing fluff. Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."
               )}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#apply"
-                className="inline-flex items-center rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 {TRN("providers.close.ctaPrimary", "Apply as a provider")}
               </a>
               <a
                 href="mailto:info@horeqa.com?subject=Provider%20application"
-                className="inline-flex items-center rounded-md border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                className="inline-flex items-center rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
               >
                 {TRN("providers.close.ctaSecondary", "Start a conversation")}
               </a>
@@ -422,7 +422,9 @@ export function ProvidersMessage() {
                     <span>
                       {TRN(
                         "providers.apply.include.integrations",
-                        "Integration docs or an overview of your API and partners"
+                        "Integration docs or an overview of your API and partners",
+                        null,
+                        "Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."
                       )}
                     </span>
                   </li>
@@ -439,4 +441,3 @@ export function ProvidersMessage() {
     </div>
   )
 }
-

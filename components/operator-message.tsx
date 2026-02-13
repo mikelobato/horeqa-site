@@ -14,7 +14,7 @@ export function OperatorMessage() {
               {TRN("home.operators.eyebrow", "For hospitality operators")}
             </h2>
             <p className="mt-2 text-2xl font-semibold text-foreground md:text-3xl">
-              {TRN("home.operators.title", "A single partner, end to end.")}
+              {TRN("home.operators.title", "A single partner, end to end.", null, "Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension.")}
             </p>
           </div>
 
@@ -65,7 +65,7 @@ export function OperatorMessage() {
                   "home.operators.p6",
                   "With Horeqa, you do not need to coordinate multiple vendors or platforms. You get one partner that understands your business, assumes responsibility, and makes sure technology works.",
                   null,
-                  "Strong closing. Avoid exaggeration; keep it grounded."
+                  "Strong closing. Avoid exaggeration; keep it grounded. Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."
                 )}
               </p>
             </div>
@@ -75,4 +75,3 @@ export function OperatorMessage() {
     </section>
   )
 }
-

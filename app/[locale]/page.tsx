@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { Services } from "@/components/services";
+import { RestaurantAreas } from "@/components/restaurant-areas";
 import { Clients } from "@/components/clients";
 import { Process } from "@/components/process";
 import { Support } from "@/components/support";
@@ -28,7 +29,7 @@ export async function generateMetadata({
     "meta.home.title",
     "Technology partner for modern hospitality",
     null,
-    "Home page meta title. Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad')."
+    "Home page meta title. Translate 'hospitality' as the industry term: Spanish should use 'hosteleria' (not 'hospitalidad'). Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."
   );
   const description = TRN(
     "meta.home.description",
@@ -66,6 +67,7 @@ export default function Page() {
       <main>
         <Hero />
         <Services />
+        <RestaurantAreas />
         <Clients />
         <Process />
         <Support />

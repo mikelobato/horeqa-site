@@ -162,7 +162,7 @@ export function Process() {
               "process.closing",
               "One partner. One conversation. One responsible team.",
               null,
-              "Closing line. Strong, short, confident."
+              "Closing line. Strong, short, confident. Use the term 'partner' when culturally understood (Spanish should keep 'partner', not 'socio'). Translate only if needed for comprehension."
             )}
           </p>
         </div>

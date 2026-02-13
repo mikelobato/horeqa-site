@@ -2,22 +2,85 @@
 
 import React from "react"
 
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react"
+import { Mail, Phone, Send, CheckCircle2 } from "lucide-react"
 import { useState } from "react"
-import { useTRN } from "@/contexts/LanguageContext"
+import { useLocale, useTRN } from "@/contexts/LanguageContext"
+
+const CONTACT_EMAIL = "info@horeqa.com"
+const CONTACT_PHONE = "+34930000000"
+const API_PUBLIC_URL_PROD = "https://api.horeqa.com"
+const API_PUBLIC_URL_DEV = "https://dev-api.horeqa.com"
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [focused, setFocused] = useState<string | null>(null)
+  const [name, setName] = useState("")
+  const [restaurantName, setRestaurantName] = useState("")
+  const [restaurantsCount, setRestaurantsCount] = useState("1")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
   const TRN = useTRN()
+  const locale = useLocale()
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const apiBaseUrl =
+    process.env.NEXT_PUBLIC_API_PUBLIC_URL ??
+    (process.env.NODE_ENV === "production" ? API_PUBLIC_URL_PROD : API_PUBLIC_URL_DEV)
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    setSubmitting(true)
+    setError(null)
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/public/leads/restaurants`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          restaurantName,
+          restaurantsCount: Number.parseInt(restaurantsCount, 10),
+          company: restaurantName,
+          phone,
+          email,
+          message,
+          locale,
+          source: "horeqa-site-contact-form",
+          pageUrl: window.location.href,
+          referrer: document.referrer || null,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Lead creation failed")
+      }
+
+      setSubmitted(true)
+      setName("")
+      setRestaurantName("")
+      setRestaurantsCount("1")
+      setPhone("")
+      setEmail("")
+      setMessage("")
+    } catch {
+      setError(
+        TRN(
+          "contact.form.error",
+          "We could not send your message right now. Please try again or email us at {{email}}.",
+          { email: CONTACT_EMAIL }
+        )
+      )
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-gradient-to-b from-white via-primary-light/5 to-white py-24 md:py-32">
+    <section id="contact" className="relative overflow-hidden bg-gradient-to-b from-white via-primary-light/5 to-white py-16 md:py-20">
       {/* Background decorations */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -right-32 top-0 h-96 w-96 rounded-full bg-gradient-to-l from-primary/10 to-accent/10 blur-3xl" />
@@ -26,7 +89,7 @@ export function Contact() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-14">
           {/* Left column */}
           <div>
             <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-primary">
@@ -44,40 +107,33 @@ export function Contact() {
 
             {/* Contact info cards */}
             <div className="mt-10 space-y-4">
-              <div className="group flex items-center gap-4 rounded-xl border border-border bg-white p-4 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500">
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="group flex items-center gap-4 rounded-xl border border-border bg-white p-4 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-500">
                   <Mail className="h-6 w-6 text-white" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{TRN("contact.emailLabel", "Email us")}</p>
-                  <a
-                    href="mailto:info@horeqa.com"
-                    className="text-base font-semibold text-foreground transition-colors hover:text-primary"
-                  >
-                    info@horeqa.com
-                  </a>
+                  <p className="text-base font-semibold text-foreground transition-colors group-hover:text-primary">
+                    {CONTACT_EMAIL}
+                  </p>
                 </div>
-              </div>
+              </a>
 
-              <div className="group flex items-center gap-4 rounded-xl border border-border bg-white p-4 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-500">
+              <a
+                href={`tel:${CONTACT_PHONE}`}
+                className="group flex items-center gap-4 rounded-xl border border-border bg-white p-4 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-purple-500">
                   <Phone className="h-6 w-6 text-white" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{TRN("contact.phoneLabel", "Call us")}</p>
-                  <p className="text-base font-semibold text-foreground">{TRN("contact.phoneNumber", "+1 (555) 123-4567")}</p>
+                  <p className="text-base font-semibold text-foreground transition-colors group-hover:text-primary">{CONTACT_PHONE}</p>
                 </div>
-              </div>
-
-              <div className="group flex items-center gap-4 rounded-xl border border-border bg-white p-4 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-green-500">
-                  <MapPin className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">{TRN("contact.locationLabel", "Visit us")}</p>
-                  <p className="text-base font-semibold text-foreground">{TRN("contact.location", "Barcelona, Spain")}</p>
-                </div>
-              </div>
+              </a>
             </div>
 
             {/* Trust badge */}
@@ -95,9 +151,9 @@ export function Contact() {
           </div>
 
           {/* Right column — form */}
-          <div>
+          <div className="lg:sticky lg:top-24 lg:self-start">
             {submitted ? (
-              <div className="flex h-full min-h-[500px] items-center justify-center rounded-2xl border border-primary/20 bg-white p-10 shadow-xl">
+              <div className="flex min-h-[340px] items-center justify-center rounded-2xl border border-primary/20 bg-white p-8 shadow-xl md:min-h-[380px]">
                 <div className="text-center">
                   <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-green-500">
                     <CheckCircle2 className="h-10 w-10 text-white" />
@@ -113,14 +169,14 @@ export function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="rounded-2xl border border-border bg-white p-8 shadow-xl md:p-10"
+                className="rounded-2xl border border-border bg-white p-6 shadow-xl md:p-7 lg:max-h-[calc(100svh-7.5rem)] lg:overflow-y-auto"
               >
                 <h3 className="text-xl font-bold text-foreground">{TRN("contact.form.title", "Send us a message")}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {TRN("contact.form.subtitle", "Fill out the form below and we'll get back to you as soon as possible.")}
                 </p>
 
-                <div className="mt-8 space-y-6">
+                <div className="mt-6 space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-foreground">
                       {TRN("contact.form.name", "Name")} <span className="text-red-500">*</span>
@@ -129,10 +185,12 @@ export function Contact() {
                       id="name"
                       type="text"
                       required
+                      value={name}
                       placeholder={TRN("contact.form.namePlaceholder", "Your name")}
+                      onChange={(e) => setName(e.target.value)}
                       onFocus={() => setFocused("name")}
                       onBlur={() => setFocused(null)}
-                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
+                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
                         focused === "name"
                           ? "border-primary ring-2 ring-primary/20"
                           : "border-input hover:border-primary/50"
@@ -141,17 +199,63 @@ export function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="company" className="block text-sm font-semibold text-foreground">
-                      {TRN("contact.form.company", "Company")}
+                    <label htmlFor="restaurantName" className="block text-sm font-semibold text-foreground">
+                      {TRN("contact.form.restaurantName", "Restaurant or chain name")} <span className="text-red-500">*</span>
                     </label>
                     <input
-                      id="company"
+                      id="restaurantName"
                       type="text"
-                      placeholder={TRN("contact.form.companyPlaceholder", "Your company")}
-                      onFocus={() => setFocused("company")}
+                      required
+                      value={restaurantName}
+                      placeholder={TRN("contact.form.restaurantNamePlaceholder", "Name of your restaurant or chain")}
+                      onChange={(e) => setRestaurantName(e.target.value)}
+                      onFocus={() => setFocused("restaurantName")}
                       onBlur={() => setFocused(null)}
-                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
-                        focused === "company"
+                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
+                        focused === "restaurantName"
+                          ? "border-primary ring-2 ring-primary/20"
+                          : "border-input hover:border-primary/50"
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="restaurantsCount" className="block text-sm font-semibold text-foreground">
+                      {TRN("contact.form.restaurantsCount", "Number of restaurants")} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="restaurantsCount"
+                      type="number"
+                      min={1}
+                      required
+                      value={restaurantsCount}
+                      placeholder={TRN("contact.form.restaurantsCountPlaceholder", "e.g. 3")}
+                      onChange={(e) => setRestaurantsCount(e.target.value)}
+                      onFocus={() => setFocused("restaurantsCount")}
+                      onBlur={() => setFocused(null)}
+                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
+                        focused === "restaurantsCount"
+                          ? "border-primary ring-2 ring-primary/20"
+                          : "border-input hover:border-primary/50"
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-foreground">
+                      {TRN("contact.form.phone", "Mobile phone")} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="phone"
+                      type="tel"
+                      required
+                      value={phone}
+                      placeholder={TRN("contact.form.phonePlaceholder", "+34 600 000 000")}
+                      onChange={(e) => setPhone(e.target.value)}
+                      onFocus={() => setFocused("phone")}
+                      onBlur={() => setFocused(null)}
+                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
+                        focused === "phone"
                           ? "border-primary ring-2 ring-primary/20"
                           : "border-input hover:border-primary/50"
                       }`}
@@ -166,10 +270,12 @@ export function Contact() {
                       id="email"
                       type="email"
                       required
+                      value={email}
                       placeholder={TRN("contact.form.emailPlaceholder", "you@company.com")}
+                      onChange={(e) => setEmail(e.target.value)}
                       onFocus={() => setFocused("email")}
                       onBlur={() => setFocused(null)}
-                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
+                      className={`mt-2 w-full rounded-lg border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
                         focused === "email"
                           ? "border-primary ring-2 ring-primary/20"
                           : "border-input hover:border-primary/50"
@@ -183,11 +289,14 @@ export function Contact() {
                     </label>
                     <textarea
                       id="message"
-                      rows={5}
+                      rows={3}
+                      required
+                      value={message}
                       placeholder={TRN("contact.form.messagePlaceholder", "Tell us about your project or needs")}
+                      onChange={(e) => setMessage(e.target.value)}
                       onFocus={() => setFocused("message")}
                       onBlur={() => setFocused(null)}
-                      className={`mt-2 w-full resize-none rounded-lg border bg-white px-4 py-3 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
+                      className={`mt-2 w-full resize-y rounded-lg border bg-white px-4 py-2 text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 ${
                         focused === "message"
                           ? "border-primary ring-2 ring-primary/20"
                           : "border-input hover:border-primary/50"
@@ -195,12 +304,21 @@ export function Contact() {
                     />
                   </div>
 
+                  {error ? (
+                    <p className="text-sm font-medium text-red-600">
+                      {error}
+                    </p>
+                  ) : null}
+
                   <button
                     type="submit"
-                    className="group flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary to-accent px-8 py-4 font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/30"
+                    disabled={submitting}
+                    className="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/30"
                   >
                     <Send className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    {TRN("contact.form.submit", "Send message")}
+                    {submitting
+                      ? TRN("contact.form.sending", "Sending...")
+                      : TRN("contact.form.submit", "Send message")}
                   </button>
                 </div>
               </form>
