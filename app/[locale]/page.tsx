@@ -63,9 +63,13 @@ export async function generateMetadata({
 export default function Page() {
   return (
     <>
-      <Header />
       <main>
-        <Hero />
+        <section className="grid h-[100dvh] min-h-[100dvh] grid-rows-[auto_minmax(0,1fr)]">
+          <Header />
+          <div className="min-h-0">
+            <Hero />
+          </div>
+        </section>
         <Services />
         <RestaurantAreas />
         <Clients />

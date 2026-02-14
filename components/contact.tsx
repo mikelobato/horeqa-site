@@ -172,9 +172,6 @@ export function Contact() {
                 className="rounded-2xl border border-border bg-white p-6 shadow-xl md:p-7 lg:max-h-[calc(100svh-7.5rem)] lg:overflow-y-auto"
               >
                 <h3 className="text-xl font-bold text-foreground">{TRN("contact.form.title", "Send us a message")}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {TRN("contact.form.subtitle", "Fill out the form below and we'll get back to you as soon as possible.")}
-                </p>
 
                 <div className="mt-6 space-y-4">
                   <div>

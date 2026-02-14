@@ -16,7 +16,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-gradient-to-b from-white via-primary-light/20 to-white pb-10 pt-20 md:pb-14 md:pt-24">
+    <section className="relative flex h-full min-h-0 items-center overflow-hidden bg-gradient-to-b from-white via-primary-light/20 to-white pb-8 pt-14 md:pb-10 md:pt-16">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <picture>
           <source media="(max-width: 767px)" srcSet={HERO_MOBILE} />
